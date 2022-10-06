@@ -1,11 +1,14 @@
 import express, { NextFunction, Request, Response } from 'express';
 import ProductRouter from './routes/ProductsRouter';
+import UserRouter from './routes/UserRouter';
 
 const app = express();
 
 app.use(express.json());
 
 app.use('/products', ProductRouter);
+
+app.use('/users', UserRouter);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   const { name, message, details } = err as any;
