@@ -16,4 +16,12 @@ export default class ProductModel {
 
     return { id: data[0].insertId, name: product.name, amount: product.amount };
   };
+
+  getAll = async () => {
+    const query = 'SELECT * FROM Trybesmith.Products';
+    const data = await this.connection.execute<ResultSetHeader>(query);
+
+    const [rows] = data;
+    return rows;
+  };
 }
