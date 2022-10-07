@@ -13,4 +13,12 @@ export default class UserController {
 
     return res.status(201).json({ token });
   };
+
+  getByUsername = async (req: Request, res: Response) => {
+    const { password } = req.body;
+    await this.service.getByUsername(req.body);
+    const token = this.service.generateToken(password);
+    
+    return res.status(200).json({ token });
+  };
 }

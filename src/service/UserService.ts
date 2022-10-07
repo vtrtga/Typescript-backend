@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import UserModel from '../models/UserModel';
 import User from '../interfaces/UserInterface';
+import UserLogin from '../interfaces/UserLoginInterface';
 
 export default class UserService {
   model: UserModel;
@@ -18,11 +19,17 @@ export default class UserService {
     return token;
   };
 
-  generateToken = (user: User) => {
+  generateToken = (user: User | UserLogin) => {
     const payload = { password: user.password };
 
     const token = jwt.sign(payload, 'SECRET');
 
     return token;
+  };
+
+  getByUsername = async (user: UserLogin) => {
+    const result = await this.model.getByUserName(user);
+
+    return result;
   };
 }

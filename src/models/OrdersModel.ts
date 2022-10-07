@@ -17,7 +17,6 @@ export default class OrdersModel {
     ON pr.orderId = Orders.id
     GROUP BY id;`;
     const [data] = await this.connection.execute<ResultSetHeader>(query);
-    console.log(data, '-----------------');
     return data;
   };
 }
